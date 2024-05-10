@@ -13,8 +13,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const MainLayOut = () => {
-  const [saidebar, setSaidebar] = useState(false)
+const MainLayOut = (props) => {
+  const [saidebar, setSaidebar] = useState(true)
 
   return (
     <Disclosure as="nav" className="bg-slate-400 h-screen w-full">
@@ -117,8 +117,8 @@ const MainLayOut = () => {
           </Disclosure.Panel>
 
           <div className=' flex justify-between mx-auto max-w-full px-2 sm:px-6 lg:px-8'>
-          <div className={` ${saidebar? 'w-[27%] p-10': 'w-[0%]'}  bg-orange-300  transition-all duration-500`}>sidbar</div>
-          <div className={`${saidebar?'w-[70%]':'w-[100%]'} bg-slate-600 p-10 transition-all duration-500`}>Main contant</div>
+          <div className={`${saidebar? 'w-[27%] p-10': 'w-[0]'}  bg-orange-300  transition-all duration-500`}>sidbar</div>
+          <div className={`${saidebar?'w-[70%]':'w-[100%]'} bg-slate-600 p-10 transition-all duration-500`}>{props.children}</div>
           </div>
         </>
       )}

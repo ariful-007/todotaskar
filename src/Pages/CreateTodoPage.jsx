@@ -1,9 +1,17 @@
-import React from 'react';
+import  { Suspense, lazy,  } from 'react';
+import MainLayOut from '../LayOut/MainLayOut';
+import Loder from '../Components/Loder';
+const CreateTodo = lazy(() => import('../Components/CreateTodo'))
+
 
 const CreateTodoPage = () => {
   return (
     <div>
-      <h1>Create todo Page</h1>
+      <MainLayOut>
+        <Suspense fallback={<Loder></Loder>}>
+          <CreateTodo></CreateTodo>
+        </Suspense>
+      </MainLayOut>
     </div>
   );
 };
