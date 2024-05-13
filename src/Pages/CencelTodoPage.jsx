@@ -1,9 +1,17 @@
-import React from 'react';
+import  { Suspense, lazy } from 'react';
+import MainLayOut from '../LayOut/MainLayOut';
+import Loder from '../Components/Loder';
+const CencelTodo = lazy(()=> import('../Components/CencelTodo'))
+
 
 const CencelTodoPage = () => {
   return (
     <div>
-      <h1>Cencel todo Page</h1>
+      <MainLayOut>
+        <Suspense fallback={<Loder></Loder>}>
+          <CencelTodo></CencelTodo>
+        </Suspense>
+      </MainLayOut>
     </div>
   );
 };

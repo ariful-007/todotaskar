@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { RegistationRequest } from '../API/Api';
+
 
 const Registration = () => {
   const [firstName, setFirstName] = useState('');
@@ -11,9 +14,10 @@ const Registration = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
+  const navigate = useNavigate()
 
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
     setFirstNameError('')
@@ -46,15 +50,22 @@ const Registration = () => {
     }
     if (!password) {
       setPasswordError('Password is required');
-    } else if (!passwordRegex.test(password)){
-      setPasswordError('Password is not valid');
-    }
+    } 
+    
     if (!firstNameError &&!lastNameError &&!emailError &&!passwordError) {
-      console.log(firstName, lastName, email, password);
+      
       setFirstName('');
       setLastName('');
       setEmail('');
       setPassword('');
+      RegistationRequest( firstName, lastName, email, password)
+      .then((result)=>{
+        if(result === true){
+          navigate('/login')
+        }else{
+          setEmailError("Email already in exist")
+        }
+      })
     }
   };
 
@@ -150,10 +161,10 @@ const Registration = () => {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Start a 14 day free trial
-            </a>
+          You already have an account? Please{' '}
+            <Link to='/login' className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Login
+            </Link>
           </p>
         </div>
     </div>

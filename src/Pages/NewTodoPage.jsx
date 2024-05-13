@@ -1,9 +1,16 @@
-import React from 'react';
+import { Suspense, lazy } from 'react';
+import MainLayOut from '../LayOut/MainLayOut';
+import Loder from '../Components/Loder';
+const NewTodo = lazy(()=> import ('../Components/NewTodo')) 
 
 const NewTodoPage = () => {
   return (
     <div>
-      <h1>New todo Page</h1>
+      <MainLayOut>
+        <Suspense fallback={<Loder></Loder>}>
+          <NewTodo></NewTodo>
+        </Suspense>
+      </MainLayOut>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { IoEye, IoEyeOff } from "react-icons/io5"; 
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -101,10 +102,10 @@ const Login = () => {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Start a 14 day free trial
-            </a>
+            Now Here? Please{' '}
+            <Link to='/registation' className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            Registation
+            </Link>
           </p>
         </div>
     </div>

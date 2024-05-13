@@ -13,6 +13,7 @@ import ProfilePage from './Pages/ProfilePage';
 import ForgotPasswordPage from './Pages/ForgotPasswordPage';
 import OtpVerifyPage from './Pages/OtpVerifyPage';
 import Page404 from './Pages/Page404';
+import NewTodoPage from './Pages/NewTodoPage';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
           <Route path='/cencel-todo' element={<CencelTodoPage></CencelTodoPage>}></Route>
           <Route path='/complated-todo' element={<ComplatedTodoPage></ComplatedTodoPage>}></Route>
           <Route path='/create-todo' element={<CreateTodoPage></CreateTodoPage>}></Route>
-          <Route path='/new-todo' element={<NewPasswordPage></NewPasswordPage>}></Route>
+          <Route path='/new-todo' element={<NewTodoPage></NewTodoPage>}></Route>
           <Route path='/progress-todo' element={<ProgressTodoPage></ProgressTodoPage>}></Route>
 
           <Route path='/profile' element={<ProfilePage></ProfilePage>}></Route>
@@ -44,4 +45,4 @@ function App() {
 
 export default App
 
-//https://todo-app-backend-b1od.onrender.com/
+
