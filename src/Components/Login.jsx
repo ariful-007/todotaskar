@@ -11,60 +11,59 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-   const handleEmail = (e) => {
+  const handleEmail = (e) => {
     setEmail(e.target.value);
-    setEmailError('')
+    setEmailError("");
   };
   const handlePassword = (e) => {
     setPassword(e.target.value);
-    setPasswordError('')
+    setPasswordError("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     // Reset any previous error messages
-    setEmailError('');
-    setPasswordError('');
-  
+    setEmailError("");
+    setPasswordError("");
+
     if (!email) {
-      setEmailError('Email is required');
+      setEmailError("Email is required");
       return;
     }
-  
+
     if (!password) {
-      setPasswordError('Password is required');
+      setPasswordError("Password is required");
       return; // Return from the function if password is empty
     }
     if (password.length < 6) {
-      setPasswordError('Password must be at least 6 characters');
+      setPasswordError("Password must be at least 6 characters");
       return; // Return from the function if password is less than 6 characters
     }
-    if(email && password){
+    if (email && password) {
       LoginRequest(email, password)
-      .then((result) => {
-        if (result === true) {
-          toast.success('Login Successfully');
-        } else {
-          if (result.error === "User Not Found") {
-            toast.error('User Not Found');
-          } else if (result.error === "Wrong Password") {
-            toast.error('Wrong Password');
+        .then((result) => {
+          if (result === true) {
+            toast.success("Login Successfully");
+            window.location.href = "/";
           } else {
-            toast.error("Something went wrong");
+            if (result.error === "User Not Found") {
+              toast.error("User Not Found");
+            } else if (result.error === "Wrong password") {
+              toast.error("Wrong password");
+            } else {
+              toast.error("Something went wrong");
+            }
           }
-        }
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
     }
-
   };
 
   return (
@@ -104,6 +103,14 @@ const Login = () => {
               >
                 Password
               </label>
+              <div className="text-sm">
+                <Link
+                  to="/forgot-password"
+                  className="font-semibold text-indigo-600 hover:text-indigo-500"
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </div>
             <div className="mt-2 relative">
               <input
@@ -138,7 +145,7 @@ const Login = () => {
         <p className="mt-10 text-center text-sm text-gray-500">
           New here? Please{" "}
           <Link
-            to="/registration"
+            to="/registation"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Register

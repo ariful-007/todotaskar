@@ -1,9 +1,10 @@
-import React from 'react';
+
+import NewPassword from '../Components/NewPassword';
 
 const NewPasswordPage = () => {
   return (
     <div>
-      <h1>New Password Page</h1>
+      <NewPassword></NewPassword>
     </div>
   );
 };

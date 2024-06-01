@@ -1,9 +1,10 @@
-import React from 'react';
+
+import OtpVerify from '../Components/OtpVerify';
 
 const OtpVerifyPage = () => {
   return (
     <div>
-      <h1>Otp Verify Page</h1>
+      <OtpVerify></OtpVerify>
     </div>
   );
 };

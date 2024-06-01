@@ -1,22 +1,38 @@
 import { useState } from "react";
+import { EmailVerifyRequest } from "../API/Api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can implement your logic to handle the forgot password request,
-    // like sending a reset password email to the provided email address.
-    setMessage(`Instructions to reset password have been sent to ${email}`);
-    setEmail("");
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    if (!email) {
+      toast.error("Email is required");
+    } else {
+      EmailVerifyRequest(email)
+        .then((result) => {
+          if (result === true) {
+            toast.success("OTP sent successfully");
+            navigate('/otp-verify'); // Navigate to OTP verification page
+          } else {
+            toast.error("User not found");
+          }
+        })
+        .catch((error) => {
+          toast.error("An error occurred");
+        });
+    }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
       <form
-        onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-40 pt-10 pb-8 mb-4"
+        onSubmit={handleSubmit} // Attach handleSubmit to form's onSubmit event
       >
         <h2 className="text-2xl mb-4 text-center font-bold">Forgot Password</h2>
         <div className="mb-4">
@@ -28,24 +44,20 @@ const ForgotPassword = () => {
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="email"
+            type="email" // Change the input type to email for better validation
             placeholder="Enter your email"
-            value={email}
+            value={email} // Bind the input value to the email state
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
         </div>
         <div className="flex items-center justify-center">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
+            type="submit" // Ensure the button type is submit
           >
             Reset Password
           </button>
-          
         </div>
-        {message && <p className="mt-4 text-center text-gray-600">{message}</p>}
       </form>
     </div>
   );
